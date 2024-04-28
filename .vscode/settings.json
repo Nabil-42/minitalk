@@ -59,6 +59,11 @@
   "files.associations": {
     "libft.h": "c",
     "signal.h": "c",
-    "minitalk.h": "c"
+    "minitalk.h": "c",
+    "types.h": "c",
+    "sigset_t.h": "c",
+    "__sigset_t.h": "c",
+    "siginfo-consts.h": "c",
+    "unistd.h": "c"
   }
 }

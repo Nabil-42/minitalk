@@ -13,6 +13,9 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+#define __USE_XOPEN_EXTENDED
+#define __USE_MISC
+#include <signal.h>
 # include <strings.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -21,7 +24,6 @@
 # include <string.h>
 # include <bsd/string.h>
 # include <fcntl.h>
-# include <signal.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 32
