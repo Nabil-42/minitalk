@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 14:21:54 by nabil             #+#    #+#             */
-/*   Updated: 2024/05/01 15:09:30 by nabil            ###   ########.fr       */
+/*   Updated: 2024/05/03 09:20:53 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ void    write_message(char *message, int server_pid)
 static void sig_handler(int sig) 
 {
     if (sig == SIGUSR1)
-    {
         flag = 1;
+    if (sig == SIGUSR2)
+    {
+        ft_printf("Message bien envoyé\n");
     }
 }
 
@@ -66,7 +68,7 @@ int main(int argc, char **argv)
     sa.sa_flags = 0;
     sigemptyset(&sa.sa_mask);
     
-    if (sigaction(SIGUSR1, &sa, NULL) == -1)
+    if (sigaction(SIGUSR1, &sa, NULL) == -1 || sigaction(SIGUSR2, &sa, NULL) == -1)
     {
         ft_dprintf(2, "Error: PID");
         exit(EXIT_FAILURE);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 14:26:34 by nabil             #+#    #+#             */
-/*   Updated: 2024/05/02 13:36:06 by nabil            ###   ########.fr       */
+/*   Updated: 2024/05/03 09:54:11 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int     uni_bis(char *code)
                     code_retour = code_retour * 16 + (code[k] - 'A' + 10);
                 } else {
                     ft_dprintf(2, "Caractère hexadécimal invalide : %c\n", code[k]);
-                    exit(1);
+                    return(-1);
                 }
                 k++;
             }
@@ -70,16 +70,14 @@ static void sig_handler(int sig, siginfo_t *info, void *context)
 {
     static char byte = 0;
     static int bit_count = 0;
-    int     byte_bis = 1;
     static char    *porte_str = NULL;
+    int     byte_bis = 1;
     char    *str_final;
     (void)context;
+    
     if (sig == SIGUSR1)
-    {
         byte |= (1 << bit_count);
-    }
-    bit_count++;
-    if (bit_count == 8)
+    if (++bit_count == 8)
     {
         if (porte_str == NULL)
             str_final = ft_strjoin("", &byte);
@@ -92,10 +90,10 @@ static void sig_handler(int sig, siginfo_t *info, void *context)
     }
     if (byte_bis == '\0')
     {
-        ft_printf("%s\n",unicode(porte_str, ft_strlen(porte_str)));
-        byte_bis = 1;
-        (free(porte_str), porte_str = NULL);
-        byte = 0;
+        str_final = unicode(porte_str, ft_strlen(porte_str));
+        (ft_printf("%s\n", str_final), byte_bis = 1);
+        (free(porte_str), free(str_final), porte_str = NULL);
+        (byte = 0, kill(info->si_pid, SIGUSR2));
     }
     kill(info->si_pid, SIGUSR1);
 }
