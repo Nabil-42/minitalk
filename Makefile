@@ -90,7 +90,7 @@ clean:
 	@make -C $(LIBFT_DIR) clean
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) server server_bonus client client_bonus
 	@$(RM) $(BONUS_NAME)
 	@make -C $(LIBFT_DIR) fclean
 
