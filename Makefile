@@ -22,7 +22,7 @@ INCLUDES        = -I$(LIBFT_DIR) -Isrc
 RM              = rm -rf
 
 SRC_CLIENT          = src/client.c
-SRC_SERVER          = src/server.c
+SRC_SERVER          = src/server.c src/fonction.c
 SRC_CLIENT_BONUS    = bonus/client_bonus.c
 SRC_SERVER_BONUS    = bonus/server_bonus.c
 
