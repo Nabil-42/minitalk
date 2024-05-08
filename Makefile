@@ -23,8 +23,8 @@ RM              = rm -rf
 
 SRC_CLIENT          = src/client.c
 SRC_SERVER          = src/server.c src/fonction.c
-SRC_CLIENT_BONUS    = bonus/client_bonus.c
-SRC_SERVER_BONUS    = bonus/server_bonus.c
+SRC_CLIENT_BONUS    = bonus/client_bonus.c 
+SRC_SERVER_BONUS    = bonus/server_bonus.c src/fonction.c
 
 OBJ_DIR             = obj/
 OBJ_CLIENT          = $(addprefix $(OBJ_DIR)/, $(SRC_CLIENT:.c=.o))

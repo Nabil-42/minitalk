@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabboud <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 14:26:34 by nabil             #+#    #+#             */
-/*   Updated: 2024/05/04 21:30:12 by nabboud          ###   ########.fr       */
+/*   Updated: 2024/05/08 23:42:40 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,28 @@ char	*unicode(char *str, int size, t_sighandler *s)
 			(s->uni.k++);
 		}
 	}
-	
+
 	return (s->uni.new_str[s->uni.k] = '\0', s->uni.new_str);
 }
 
-// void	end_sig(t_sighandler *s, char *p_str)
-// {
-// 	if (s->byte_bis == '\0')
-// 	{
-// 		ft_printf("%s\n", unicode(p_str, ft_strlen(p_str), s));
-// 		s->byte_bis = 1;
-// 		(free(p_str), free(s->uni.new_str) ,p_str = NULL);
-// 		s->byte = 0;
-// 	}
-// }
+void start_sig(t_sighandler *s, char **p_str, char *byte, int *bit_count)
+{
+    if (++(*bit_count) == 8)
+    {
+        if (*p_str == NULL)
+            s->str_f = ft_strjoin("", byte);
+        else
+        {
+            s->str_f = ft_strjoin(*p_str, byte);
+            free(*p_str);
+        }
+        *p_str = s->str_f;
+        *bit_count = 0;
+        if (*byte == '\0')
+            s->byte_bis = '\0';
+        *byte = 0;
+    }
+}
 
 static void	sig_handler(int sig, siginfo_t *info, void *context)
 {
@@ -89,21 +97,7 @@ static void	sig_handler(int sig, siginfo_t *info, void *context)
 	init_s(&s);
 	if (sig == SIGUSR1)
 		byte |= (1 << bit_count);
-	if (++bit_count == 8)
-	{
-		if (p_str == NULL)
-			s.str_f = ft_strjoin("", &byte);
-		else
-		{
-			s.str_f = ft_strjoin(p_str, &byte);
-			free(p_str);
-		}
-		p_str = s.str_f;
-		bit_count = 0;
-		if (byte == '\0')
-			s.byte_bis = '\0';
-		byte = 0;
-	}
+	start_sig(&s, &p_str, &byte, &bit_count);
 	if (s.byte_bis == '\0' && p_str != NULL)
 	{
 		ft_printf("%s\n", unicode(p_str, ft_strlen(p_str), &s));
