@@ -26,3 +26,18 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
+
+size_t	ft_strlen_unsigned(unsigned const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	if (!str)
+	{
+		ft_printf("The argument string is NULL in ft_strlen() function.\n");
+		return (0);
+	}
+	while (str[i])
+		i++;
+	return (i);
+}

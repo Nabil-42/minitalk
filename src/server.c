@@ -6,7 +6,7 @@
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 14:26:34 by nabil             #+#    #+#             */
-/*   Updated: 2024/05/08 23:42:40 by nabil            ###   ########.fr       */
+/*   Updated: 2024/05/11 12:36:05 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	uni_bis(char *code)
 			code_retour = code_retour * 16 + (code[k] - 'A' + 10);
 		else
 		{
-			ft_dprintf(2, "Caractère hexadécimal invalide : %c\n", code[k]);
-			exit(1);
+			ft_dprintf(2, "Caractère hexadécimal invalide\n");
+			return (1);
 		}
 		k++;
 	}
@@ -67,15 +67,15 @@ char	*unicode(char *str, int size, t_sighandler *s)
 	return (s->uni.new_str[s->uni.k] = '\0', s->uni.new_str);
 }
 
-void start_sig(t_sighandler *s, char **p_str, char *byte, int *bit_count)
+void start_sig(t_sighandler *s, char **p_str, unsigned char *byte, int *bit_count)
 {
     if (++(*bit_count) == 8)
     {
         if (*p_str == NULL)
-            s->str_f = ft_strjoin("", byte);
+            s->str_f = ft_strjoin_unsigned("", byte);
         else
         {
-            s->str_f = ft_strjoin(*p_str, byte);
+            s->str_f = ft_strjoin_unsigned(*p_str, byte);
             free(*p_str);
         }
         *p_str = s->str_f;
@@ -90,7 +90,7 @@ static void	sig_handler(int sig, siginfo_t *info, void *context)
 {
 	t_sighandler	s;
 	static char		*p_str = NULL;
-	static char		byte = 0;
+	static unsigned char		byte = 0;
 	static int		bit_count = 0;
 
 	(void)context;
