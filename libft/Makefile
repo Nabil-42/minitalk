@@ -15,7 +15,7 @@
 
 NAME        = libft.a
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -fPIC
+CFLAGS      = -Wall -Wextra -Werror -fPIC -g3
 RM          = rm -rf
 
 SRC         = char/ft_isalnum.c char/ft_isalpha.c char/ft_isascii.c \

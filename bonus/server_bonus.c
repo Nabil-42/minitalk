@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nabboud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 14:26:34 by nabil             #+#    #+#             */
-/*   Updated: 2024/05/08 23:44:27 by nabil            ###   ########.fr       */
+/*   Updated: 2024/05/13 13:17:52 by nabboud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,27 +63,26 @@ char	*unicode(char *str, int size, t_sighandler *s)
 			(s->uni.k++);
 		}
 	}
-
 	return (s->uni.new_str[s->uni.k] = '\0', s->uni.new_str);
 }
 
-void start_sig(t_sighandler *s, char **p_str, char *byte, int *bit_count)
+void	start_sig(t_sighandler *s, char **p_str, char *byte, int *bit_count)
 {
-    if (++(*bit_count) == 8)
-    {
-        if (*p_str == NULL)
-            s->str_f = ft_strjoin("", byte);
-        else
-        {
-            s->str_f = ft_strjoin(*p_str, byte);
-            free(*p_str);
-        }
-        *p_str = s->str_f;
-        *bit_count = 0;
-        if (*byte == '\0')
-            s->byte_bis = '\0';
-        *byte = 0;
-    }
+	if (++(*bit_count) == 8)
+	{
+		if (*p_str == NULL)
+			s->str_f = ft_strjoin("", byte);
+		else
+		{
+			s->str_f = ft_strjoin(*p_str, byte);
+			free(*p_str);
+		}
+		*p_str = s->str_f;
+		*bit_count = 0;
+		if (*byte == '\0')
+			s->byte_bis = '\0';
+		*byte = 0;
+	}
 }
 
 static void	sig_handler(int sig, siginfo_t *info, void *context)
@@ -104,7 +103,7 @@ static void	sig_handler(int sig, siginfo_t *info, void *context)
 		s.byte_bis = 1;
 		(free(p_str), free(s.uni.new_str), p_str = NULL);
 		s.byte = 0;
-        kill(info->si_pid, SIGUSR2);
+		kill(info->si_pid, SIGUSR2);
 	}
 	kill(info->si_pid, SIGUSR1);
 }

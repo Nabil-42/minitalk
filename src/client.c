@@ -6,7 +6,7 @@
 /*   By: nabboud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 14:21:54 by nabil             #+#    #+#             */
-/*   Updated: 2024/05/04 16:16:17 by nabboud          ###   ########.fr       */
+/*   Updated: 2024/05/13 15:28:48 by nabboud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	write_message(char *message, int server_pid, int i)
 				kill(server_pid, SIGUSR1);
 			else
 				kill(server_pid, SIGUSR2);
-			usleep(500);
 			while (g_flag == 0)
 				;
 		}
@@ -39,7 +38,6 @@ void	write_message(char *message, int server_pid, int i)
 	{
 		g_flag = 0;
 		kill(server_pid, SIGUSR2);
-		usleep(500);
 		while (g_flag == 0)
 			;
 	}
@@ -50,6 +48,7 @@ static void	sig_handler(int sig)
 	if (sig == SIGUSR1)
 	{
 		g_flag = 1;
+		ft_printf("FLAG\n");
 	}
 }
 

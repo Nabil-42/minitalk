@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_freetab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nabboud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:40:06 by soelalou          #+#    #+#             */
-/*   Updated: 2024/04/04 18:35:42 by nabil            ###   ########.fr       */
+/*   Updated: 2024/05/13 13:16:38 by nabboud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	ft_freetab_char(char **tab)
 {
 	size_t	i;
-	
+
 	if (tab == NULL)
-        return;
+		return ;
 	i = 0;
 	while (tab[i] != NULL)
 	{
@@ -32,7 +32,7 @@ void	ft_freetab_int(int **tab, size_t i)
 	size_t	j;
 
 	if (tab == NULL)
-        return;
+		return ;
 	j = 0;
 	while (j < i)
 	{

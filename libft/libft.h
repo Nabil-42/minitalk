@@ -13,9 +13,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#define __USE_XOPEN_EXTENDED
-#define __USE_MISC
-#include <signal.h>
+# include <signal.h>
 # include <strings.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -34,7 +32,6 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }			t_list;
-
 
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
@@ -66,6 +63,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strnstr(const char *str, const char *tf, size_t n);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
+char	*ft_strjoin_unsigned_free(char *s1, unsigned char const *s2);
 char	*ft_strjoin_unsigned(char const *s1, unsigned char const *s2);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strjoin_free(char *s1, char const *s2);

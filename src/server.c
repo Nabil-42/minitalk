@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nabboud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 14:26:34 by nabil             #+#    #+#             */
-/*   Updated: 2024/05/11 12:36:05 by nabil            ###   ########.fr       */
+/*   Updated: 2024/05/13 15:38:43 by nabboud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,34 +63,33 @@ char	*unicode(char *str, int size, t_sighandler *s)
 			(s->uni.k++);
 		}
 	}
-
 	return (s->uni.new_str[s->uni.k] = '\0', s->uni.new_str);
 }
 
-void start_sig(t_sighandler *s, char **p_str, unsigned char *byte, int *bit_count)
+void	start_sig(t_sighandler *s, char **p_str, char *byte, int *bit_count)
 {
-    if (++(*bit_count) == 8)
-    {
-        if (*p_str == NULL)
-            s->str_f = ft_strjoin_unsigned("", byte);
-        else
-        {
-            s->str_f = ft_strjoin_unsigned(*p_str, byte);
-            free(*p_str);
-        }
-        *p_str = s->str_f;
-        *bit_count = 0;
-        if (*byte == '\0')
-            s->byte_bis = '\0';
-        *byte = 0;
-    }
+	if (++(*bit_count) == 8)
+	{
+		if (*p_str == NULL)
+			s->str_f = ft_strjoin("", byte);
+		else
+		{
+			s->str_f = ft_strjoin(*p_str, byte);
+			free(*p_str);
+		}
+		*p_str = s->str_f;
+		*bit_count = 0;
+		if (*byte == '\0')
+			s->byte_bis = '\0';
+		*byte = 0;
+	}
 }
 
 static void	sig_handler(int sig, siginfo_t *info, void *context)
 {
 	t_sighandler	s;
 	static char		*p_str = NULL;
-	static unsigned char		byte = 0;
+	static char		byte = 0;
 	static int		bit_count = 0;
 
 	(void)context;
@@ -102,7 +101,10 @@ static void	sig_handler(int sig, siginfo_t *info, void *context)
 	{
 		ft_printf("%s\n", unicode(p_str, ft_strlen(p_str), &s));
 		s.byte_bis = 1;
-		(free(p_str), free(s.uni.new_str), p_str = NULL);
+		free(p_str);
+		free(s.uni.new_str);
+		p_str = NULL;
+		s.uni.new_str = NULL;
 		s.byte = 0;
 	}
 	kill(info->si_pid, SIGUSR1);
