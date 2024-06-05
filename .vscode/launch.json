@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/nabil/42/minitalk/src",
-      "program": "/home/nabil/42/minitalk/src/build/Debug/outDebug",
+      "cwd": "/home/nabil/42/minishell",
+      "program": "/home/nabil/42/minishell/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
