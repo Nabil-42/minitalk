@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabboud <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:27:58 by tissad            #+#    #+#             */
-/*   Updated: 2024/05/30 13:57:28 by nabboud          ###   ########.fr       */
+/*   Updated: 2024/06/08 15:14:26 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
+# ifndef LIBFT_H
 # define LIBFT_H
 
 # include <stdlib.h>
@@ -20,6 +20,9 @@
 # include <string.h>
 # include <stdint.h>
 # include <fcntl.h>
+
+
+
 
 /******************************************************************************/
 /*                             Mandatory                                      */

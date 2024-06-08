@@ -6,7 +6,7 @@
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:48:52 by nabboud           #+#    #+#             */
-/*   Updated: 2024/06/05 23:08:19 by nabil            ###   ########.fr       */
+/*   Updated: 2024/06/08 19:21:59 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,11 @@ int builtin(char *line);
 void cd_project(char **tab);
 void pwd(char **tab);
 void export(char **tab);
-int dollar_double(char *str, char *new_str, int i, int j);
-void echo_take_of_double_quote(char *str, t_echo *eko, int n);
-int dollar(char *str, char *new_str, int i, int j);
-void echo_take_of_simple_quote(char *str, t_echo *eko, int n);
+int dollar_double(char *str, t_echo *eko);
+int echo_take_of_double_quote(char *str, t_echo *eko, int n);
+int dollar(char *str, t_echo *eko);
+int dollar_n(char *str, t_echo *eko);
+int echo_take_of_simple_quote(char *str, t_echo *eko, int n);
 
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 17:37:06 by nabil             #+#    #+#             */
-/*   Updated: 2024/06/03 22:27:30 by nabil            ###   ########.fr       */
+/*   Updated: 2024/06/08 16:20:15 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void sig_handler(int sig)
                 {
                         flag = 0;
                         printf("\n");
+                        exit(1);
                 }
                 else 
                 {
@@ -33,6 +34,7 @@ void sig_handler(int sig)
                 rl_on_new_line();
                 rl_replace_line("", 0);
                 rl_redisplay();
+                
                 }
         }
 }

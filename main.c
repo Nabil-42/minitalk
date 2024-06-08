@@ -6,13 +6,12 @@
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:46:58 by nabboud           #+#    #+#             */
-/*   Updated: 2024/06/04 13:39:14 by nabil            ###   ########.fr       */
+/*   Updated: 2024/06/08 16:21:42 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <errno.h>
-#include <libft.h>
 #include "lib/libft/includes/libft.h"
 #include <readline/history.h>
 #include <readline/readline.h>
@@ -93,11 +92,16 @@ void	ft_execve(char *line)
 	char	*path_cmd;
 	int		execve_status;
 	char	*new_line;
+	char	*verif;
 
 	flag = 1;
 	new_line = verif_quote(line);
+	if (new_line == NULL || *new_line == '\0')
+		return (exit(1));
 	args = cmd_args(new_line);
-	verif_quote(args[0]);
+	verif = verif_quote(args[0]);
+	if (verif == NULL || *verif == '\0')
+		return (exit(1));
 	path_cmd = based_path(args[0]);
 	execve_status = execve(path_cmd, args, NULL);
 	if (execve_status != 0)
@@ -105,7 +109,7 @@ void	ft_execve(char *line)
 		free_tab(args);
 		free(path_cmd);
 		return (printf("minishell: %s: trouver msg derreur\n", args[0]),
-			exit(128 + execve_status));
+			exit(128 + execve_status), (void)1);
 	}
 }
 int verif_wight_space(char *line)
