@@ -6,7 +6,7 @@
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:27:58 by tissad            #+#    #+#             */
-/*   Updated: 2024/06/08 15:14:26 by nabil            ###   ########.fr       */
+/*   Updated: 2024/06/09 20:59:35 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strcat(char *dest, const char *src);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	*ft_memset(void *s, int c, size_t n);
+void	ft_memset_bis(char *str, int n, int size);
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
