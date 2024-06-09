@@ -6,12 +6,12 @@
 #    By: nabil <nabil@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/02 17:56:57 by tissad            #+#    #+#              #
-#    Updated: 2024/06/04 21:01:44 by nabil            ###   ########.fr        #
+#    Updated: 2024/06/09 20:26:09 by nabil            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #comipilation && shell cmd
-CC				:= 	gcc
+CC				:= 	gcc -g -O0
 CFLAGS			:= 	-Wall -Wextra -Werror
 RMF				:= 	rm -f
 MV				:= 	mv

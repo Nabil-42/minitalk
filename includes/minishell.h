@@ -6,7 +6,7 @@
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:48:52 by nabboud           #+#    #+#             */
-/*   Updated: 2024/06/08 19:21:59 by nabil            ###   ########.fr       */
+/*   Updated: 2024/06/09 21:19:05 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_echo
         int flag_double;
         int flag_simple;
         char *line;
+        int flag_print;
         int i;
         int j;
 }t_echo;

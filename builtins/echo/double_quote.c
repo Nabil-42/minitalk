@@ -6,7 +6,7 @@
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 14:19:28 by tissad            #+#    #+#             */
-/*   Updated: 2024/06/08 20:06:01 by nabil            ###   ########.fr       */
+/*   Updated: 2024/06/09 21:29:56 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ int dollar_double(char *str, t_echo *eko)
     if (str[eko->i] == '$')
     {
         ++eko->i;
+        k = 0;
         while (((str[eko->i] >= 'A' && str[eko->i] <= 'Z')
                 || (str[eko->i] >= 'a' && str[eko->i] <= 'z'))
                 && str[eko->i] != '\0')
@@ -163,10 +164,9 @@ int echo_take_of_double_quote(char *str, t_echo *eko, int n)
         {
                 if (str[eko->i] == '"' && str[eko->i + 1] == '"')
                 {
-                        eko->line[eko->j] = ' ';
-                        eko->line[eko->j + 1] = '\0';
+                        eko->line[eko->j] = '\0';
                         eko->i += 2;
-                        return (0);
+                        return (2);
                 }
                 
                 if (str[eko->i] == '"')

@@ -6,7 +6,7 @@
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 14:19:28 by tissad            #+#    #+#             */
-/*   Updated: 2024/06/08 19:45:16 by nabil            ###   ########.fr       */
+/*   Updated: 2024/06/09 21:30:01 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int echo_take_of_simple_quote(char *str, t_echo *eko, int n)
                 if (str[eko->i] == 39 && str[eko->i + 1] == 39)
                 {
                         eko->i += 2;
-                        return (0);
+                        eko->line[eko->j] = '\0';
+                        printf("ICI\n");
+                        return (2);
                 }
                 if (str[eko->i] == 39)
                 {
