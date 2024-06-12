@@ -6,7 +6,7 @@
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 14:19:28 by tissad            #+#    #+#             */
-/*   Updated: 2024/06/09 22:01:43 by nabil            ###   ########.fr       */
+/*   Updated: 2024/06/12 15:20:39 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../lib/libft/includes/libft.h"
 
 #define PATH_MAX 4096
+extern volatile sig_atomic_t flag;
 
 char *echo_verif_quote(char *str, t_echo *eko)
 {
@@ -56,7 +57,7 @@ char *echo_verif_quote(char *str, t_echo *eko)
                                 continue;
                         
                         else {
-                                tmp = readline(NULL);
+                                tmp = readline(">");
                                 if (tmp == NULL) 
                                 { 
                                         free(str);
@@ -70,7 +71,6 @@ char *echo_verif_quote(char *str, t_echo *eko)
                                 }
                                 str = buff;
                                 flag_boucle = 1;
-                                ++i;
                                 continue;
                         }
                 }
@@ -137,11 +137,15 @@ char *remake_str(char **tab, t_echo *eko, int i)
         int k;
         char *new_str;
         
+        if (tab[i] == NULL)
+                return (NULL);
         new_str = malloc(sizeof(char) * eko->len_str + 1);
         if (new_str == NULL)
                 return (NULL);
         j = 0;
         k = 0;
+        
+                
         while (tab[i])
         {
                 while(tab[i][j])
@@ -172,6 +176,7 @@ void echo(char **tab, t_echo *eko)
 
     if (!str) 
     {
+        free_tab(tab);
         free(str);
         return;
     }
@@ -230,6 +235,7 @@ int builtin(char *line)
         char **tab;
         
         t_echo eko;
+        flag = 2;
         tab = ft_split(line, ' ');
         init_eko(&eko, line);
         if (ft_strcmp(tab[0], "echo") == 0)

@@ -6,7 +6,7 @@
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:27:58 by tissad            #+#    #+#             */
-/*   Updated: 2024/06/09 20:59:35 by nabil            ###   ########.fr       */
+/*   Updated: 2024/06/12 15:02:28 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <string.h>
 # include <stdint.h>
 # include <fcntl.h>
-
+# include <limits.h>
 
 
 

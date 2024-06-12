@@ -6,7 +6,7 @@
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:46:58 by nabboud           #+#    #+#             */
-/*   Updated: 2024/06/08 16:21:42 by nabil            ###   ########.fr       */
+/*   Updated: 2024/06/12 15:03:08 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "lib/libft/includes/libft.h"
 #include <readline/history.h>
 #include <readline/readline.h>
+
+#define PATH_MAX 4096
 
 extern volatile sig_atomic_t flag;
 

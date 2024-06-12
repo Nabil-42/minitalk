@@ -6,7 +6,7 @@
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 17:37:06 by nabil             #+#    #+#             */
-/*   Updated: 2024/06/08 16:20:15 by nabil            ###   ########.fr       */
+/*   Updated: 2024/06/12 15:12:35 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,38 @@
 #include <signal.h>
 
 volatile sig_atomic_t flag = 0;
+#define PATH_MAX 4096
+
+// static char	*ft_get_prompt(void)
+// {
+// 	char	path[PATH_MAX];
+// 	char	*prompt;
+// 	char	*tmp;
+
+// 	tmp = ft_strjoin("-> ", getcwd(path, PATH_MAX));
+// 	prompt = ft_strjoin(tmp, " ");
+// 	free(tmp);
+// 	return (prompt);
+// }
 
 void sig_handler(int sig)
 {
+        // char *prompt;
         if (sig == SIGINT)
         {       
                 if (flag == 1)
                 {
                         flag = 0;
-                        printf("\n");
                         exit(1);
+                }
+                if (flag == 2)
+                {
+                        // printf("\n");
+                        // rl_on_new_line();
+                        // rl_replace_line("", 0);
+                        // prompt = ft_get_prompt();
+                        // readline(prompt);
+                        // flag = 0;
                 }
                 else 
                 {
@@ -34,7 +56,6 @@ void sig_handler(int sig)
                 rl_on_new_line();
                 rl_replace_line("", 0);
                 rl_redisplay();
-                
                 }
         }
 }
