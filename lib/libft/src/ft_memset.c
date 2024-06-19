@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tissad <issad.tahar@icloud.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:07:26 by tissad            #+#    #+#             */
-/*   Updated: 2024/06/09 21:00:46 by nabil            ###   ########.fr       */
+/*   Updated: 2023/11/16 13:48:55 by tissad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void	ft_memset_bis(char *str, int n, int size)
-{
-	while (n < size)
-	{
-		str[n] = '\0';
-		++n;
-	}
-}
 
 void	*ft_memset(void *s, int c, size_t n)
 {

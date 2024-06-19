@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tissad <tissad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:27:58 by tissad            #+#    #+#             */
-/*   Updated: 2024/06/12 15:02:28 by nabil            ###   ########.fr       */
+/*   Updated: 2024/06/13 17:07:13 by tissad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef LIBFT_H
+#ifndef LIBFT_H
 # define LIBFT_H
 
 # include <stdlib.h>
@@ -20,9 +20,6 @@
 # include <string.h>
 # include <stdint.h>
 # include <fcntl.h>
-# include <limits.h>
-
-
 
 /******************************************************************************/
 /*                             Mandatory                                      */
@@ -43,6 +40,7 @@ int		ft_strtoi(const char *s, char **endptr);
 char	*ft_strtok(char *str, const char *delimiters);
 char	*ft_itoa(int n);
 char	*ft_strdup(const char *src);
+char	*ft_strndup(char const *src, size_t len);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
@@ -55,7 +53,6 @@ char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strcat(char *dest, const char *src);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	*ft_memset(void *s, int c, size_t n);
-void	ft_memset_bis(char *str, int n, int size);
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
@@ -81,12 +78,14 @@ typedef struct s_list
 }	t_list;
 /*----------------------------------------------------------------------------*/
 int		ft_lstsize(t_list *lst);
-void	ft_lstadd_front(t_list **lst, t_list *n);
-void	ft_lstadd_back(t_list **lst, t_list *n);
+void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
+void	ft_lstdelcond(t_list **lst, void *value, int (*cond)(void*, void*), \
+void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstnew(void *content);
+void	ft_lstadd_back(t_list **lst, t_list *new);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 /******************************************************************************/

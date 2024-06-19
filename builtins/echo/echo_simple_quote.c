@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   simple_quote.c                                     :+:      :+:    :+:   */
+/*   echo_simple_quote.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nabil <nabil@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 14:19:28 by tissad            #+#    #+#             */
-/*   Updated: 2024/06/09 21:30:01 by nabil            ###   ########.fr       */
+/*   Updated: 2024/06/19 11:44:26 by nabil            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../lib/libft/includes/libft.h"
+#include "../../includes/minishell.h"
+#include "../../lib/libft/includes/libft.h"
 
 int echo_take_of_simple_quote(char *str, t_echo *eko, int n)
 {
@@ -23,7 +23,6 @@ int echo_take_of_simple_quote(char *str, t_echo *eko, int n)
                 {
                         eko->i += 2;
                         eko->line[eko->j] = '\0';
-                        printf("ICI\n");
                         return (2);
                 }
                 if (str[eko->i] == 39)
@@ -37,9 +36,14 @@ int echo_take_of_simple_quote(char *str, t_echo *eko, int n)
                                 return (0);
                         }
                 }
+                
                 eko->line[eko->j] = str[eko->i];
-                ++eko->i;
-                ++eko->j;
+                if (str[eko->i] == '$' && str[eko->i + 1] == ' ')
+                {
+                        ++eko->j;
+                        eko->line[eko->j] = ' ';
+                }
+                (++eko->i, ++eko->j);
         }
         return (0);
 }
