@@ -1,120 +1,98 @@
 # **************************************************************************** #
-#                                                                              #
+#	                                                                          #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: nabil <nabil@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/02 17:56:57 by tissad            #+#    #+#              #
-#    Updated: 2024/06/18 20:29:44 by nabil            ###   ########.fr        #
+#    Created: 2024/04/08 14:25:38 by nabil             #+#    #+#              #
+#    Updated: 2024/05/02 22:07:58 by nabil            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#comipilation && shell cmd
-CC			:= gcc -O0 -g
-CFLAGS		:= -Wall -Wextra -Werror
-RMF			:= rm -f
-MK			:= mkdir
-NR			:= norminette
-NRCFLAGS	:= -R CheckForbiddenSourceHeader
-NRHFLAGS	:= -R CheckDefine
-GCL			:= git clone
-GADD		:= git add
-GCMT		:= git commit -m "auto commit: update"
-GPUSH		:= git push
-GREEN		:= \033[0;32m
-NC			:= \033[0m
-INFOS		:= infos
-LIBFTDIR	:= ./lib/libft
-LIBFT		:= $(LIBFTDIR)/libft.a
-HDRS		:= ./includes
-SRCS		:= ./main.c \
-			./signals/signals.c \
-			./pipe/pipe_main.c \
-			./parsing/parsing.c \
-			./builtins/echo/echo.c \
-			./builtins/echo/echo_simple_quote.c \
-			./builtins/echo/echo_double_quote.c \
-			./builtins/echo/echo_2.c \
-			./builtins/echo/dollar.c \
-			./builtins/echo/dollar_n.c \
-			./builtins/echo/dollar_double.c \
-			./builtins/env/env_1.c \
-			./builtins/env/env_2.c \
-			./builtins/env/env_3.c \
-			./builtins/redirection/right.c \
-			./builtins/redirection/right_double.c \
-			./builtins/builtin.c \
-			./builtins/cd_project.c \
-			./builtins/pwd.c
+# **************************************************************************** #
+# VARIABLES
 
-OBJS		:= $(SRCS:.c=.o)
-BONUS		:= tahar
-BONUSDIR	:= ./builtins
-B_SOURCES	:= $(BONUSDIR)/env.c
-B_OBJECTS	:= $(B_SOURCES:.c=.o)
-HEADERS		:= -I $(HDRS) -I $(LIBFTDIR)/includes -I $(BONUSDIR)
-LIBS		:= $(LIBFT) -lreadline -lncurses
+NAME            = minitalk
+CC              = gcc
+CFLAGS          = -Wall -Wextra -Werror
+LIBFT_DIR       = libft
+LIBFT           = $(LIBFT_DIR)/libft.a
+INCLUDES        = -I$(LIBFT_DIR) -Isrc
+RM              = rm -rf
 
-NAME		:= minishell
+SRC_CLIENT          = src/client.c
+SRC_SERVER          = src/server.c src/fonction.c
+SRC_CLIENT_BONUS    = bonus/client_bonus.c 
+SRC_SERVER_BONUS    = bonus/server_bonus.c src/fonction.c
 
-all: $(INFOS) libft $(NAME)
+OBJ_DIR             = obj/
+OBJ_CLIENT          = $(addprefix $(OBJ_DIR)/, $(SRC_CLIENT:.c=.o))
+OBJ_SERVER          = $(addprefix $(OBJ_DIR)/, $(SRC_SERVER:.c=.o))
+OBJ_CLIENT_BONUS    = $(addprefix $(OBJ_DIR)/, $(SRC_CLIENT_BONUS:.c=.o))
+OBJ_SERVER_BONUS    = $(addprefix $(OBJ_DIR)/, $(SRC_SERVER_BONUS:.c=.o))
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@ $(HEADERS)
+# **************************************************************************** #
+# COLORS
+CYAN        = \033[0;36m
+GREEN       = \033[0;32m
+YELLOW      = \033[0;33m
+RED         = \033[0;31m
+BROWN       = \033[0;90m
+END_COLOR   = \033[0m
 
-$(INFOS):
-	@$(MK) -p $(INFOS)
+# **************************************************************************** #
+# RULES
 
-$(NAME): $(OBJS) $(HDRS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
-	@echo "$(GREEN)**********************$(NC)"
-	@echo "$(GREEN)* $(NAME) COMPILED *$(NC)"
-	@echo "$(GREEN)**********************$(NC)"
+all: client server
 
-bonus: $(BONUS)
+client: $(OBJ_CLIENT) $(LIBFT)
+	@printf "$(GREEN)[Compilation]$(END_COLOR) Compiling $(CYAN)%s$(END_COLOR)..." client.c && \
+	$(CC) $(CFLAGS) $(OBJ_CLIENT) $(LIBFT) -o client && \
+	printf "$(GREEN)DONE$(END_COLOR)\n" && \
+	echo "$(CYAN)[Minitalk]$(END_COLOR) Client is ready !"
 
-$(BONUS): $(LIBS) $(B_OBJECTS)
-	@$(CC) $(CFLAGS) $(B_OBJECTS) $(LIBS) $(HEADERS) -o $(BONUS)
-	@echo "$(GREEN)**********************$(NC)"
-	@echo "$(GREEN)*   BONUS COMPILED   *$(NC)"
-	@echo "$(GREEN)**********************$(NC)"
+server: $(OBJ_SERVER) $(LIBFT)
+	@printf "$(GREEN)[Compilation]$(END_COLOR) Compiling $(CYAN)%s$(END_COLOR)..." server.c && \
+	$(CC) $(CFLAGS) $(OBJ_SERVER) $(LIBFT) -o server && \
+	printf "$(GREEN)DONE$(END_COLOR)\n" && \
+	echo "$(CYAN)[Minitalk]$(END_COLOR) Server is ready !"
 
-libft: $(LIBFT)
 
 $(LIBFT):
-	@$(MAKE) -s -C $(LIBFTDIR) bonus
-	@echo "$(GREEN)**********************$(NC)"
-	@echo "$(GREEN)*   LIBFT COMPILED   *$(NC)"
-	@echo "$(GREEN)**********************$(NC)"
+	@make -C $(LIBFT_DIR)
 
-norme: $(INFOS)
-	@$(NR) $(NRCFLAGS) $(SRCS) $(BONUSDIR)/*c > $(INFOS)/norme_infos.txt
-	@$(NR) $(NRHFLAGS) $(HDRS)/* $(BONUSDIR)/*.h >> $(INFOS)/norme_infos.txt
-	@echo "$(GREEN)**********************$(NC)"
-	@echo "$(GREEN)*      NORME OK      *$(NC)"
-	@echo "$(GREEN)**********************$(NC)"
+$(OBJ_CLIENT): | $(OBJ_DIR)
 
-push: fclean $(INFOS)
-	@$(GADD) Makefile $(SRCS) $(HDRS) >> $(INFOS)/git_infos.txt 2>&1
-	@$(GCMT) >> $(INFOS)/git_infos.txt 2>&1
-	@$(GPUSH) >> $(INFOS)/git_infos.txt 2>&1
-	@echo "$(GREEN)**********************$(NC)"
-	@echo "$(GREEN)*  $(NAME) PUSHED  *$(NC)"
-	@echo "$(GREEN)**********************$(NC)"
+$(OBJ_SERVER): | $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+bonus: client_bonus server_bonus
+
+client_bonus: $(OBJ_CLIENT_BONUS) $(LIBFT)
+	@printf "$(GREEN)[Compilation]$(END_COLOR) Compiling $(CYAN)%s$(END_COLOR)..." client_bonus.c && \
+	$(CC) $(CFLAGS) $(OBJ_CLIENT_BONUS) $(LIBFT) -o client_bonus && \
+	printf "$(GREEN)DONE$(END_COLOR)\n"
+
+server_bonus: $(OBJ_SERVER_BONUS) $(LIBFT)
+	@printf "$(GREEN)[Compilation]$(END_COLOR) Compiling $(CYAN)%s$(END_COLOR)..." server_bonus.c && \
+	$(CC) $(CFLAGS) $(OBJ_SERVER_BONUS) $(LIBFT) -o server_bonus && \
+	printf "$(GREEN)DONE$(END_COLOR)\n"
 
 clean:
-	@$(MAKE) -s -C $(LIBFTDIR) clean
-	@$(RMF) $(OBJS) $(B_OBJECTS) ./*.o
-	@echo "$(GREEN)**********************$(NC)"
-	@echo "$(GREEN)*  DIRECTORY CLEANED *$(NC)"
-	@echo "$(GREEN)**********************$(NC)"
+	@$(RM) $(OBJ_DIR)
+	@make -C $(LIBFT_DIR) clean
 
 fclean: clean
-	@$(MAKE) -s -C $(LIBFTDIR) fclean
-	@$(RMF) -r $(INFOS)
-	@$(RMF) $(LIBFT) $(NAME) $(BONUS)
+	@$(RM) $(NAME) server server_bonus client client_bonus
+	@make -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
-.PHONY: re fclean clean all norme libmlx
+.PHONY: all clean fclean re
