@@ -1,8 +1,0 @@
-[
-    {
-        "key": "ctrl+shift+g",
-        "command": "workbench.action.tasks.runTask",
-        "args": "git-add-commit-push",
-        "when": "editorTextFocus"
-    }
-]
